@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import cities from "cities.json";
+import ReactSpeedometer from "react-d3-speedometer";
 import { search } from "../assets";
 
 function WeatherApp() {
@@ -118,7 +119,7 @@ function WeatherApp() {
             </div>
           )}
         </div>
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-3 ">
           <div className="col-span-3">
             <div className="flex h-full flex-col rounded-2xl border-0.5 border-neutrals-50/30 bg-neutrals-800/60 p-6 backdrop-blur-xl">
               <h2 className="font-semibold leading-none text-neutrals-50  text-2xl">
@@ -152,7 +153,6 @@ function WeatherApp() {
                               </li>
                             );
                           }
-
                           return null;
                         })}
                     </ul>
@@ -163,7 +163,31 @@ function WeatherApp() {
           </div>
 
           <div className="col-span-3 md:col-span-1">
-            <div className="w-full h-full bg-red-100">1</div>
+            <div className="flex h-full flex-col rounded-2xl border-0.5 border-neutrals-50/30 bg-neutrals-800/60 p-6 backdrop-blur-xl text-neutrals-50">
+              <h2 className="font-display font-semibold leading-none  text-2xl">
+                Wind Speed
+              </h2>
+              <hr className="my-4 border-neutrals-50/30" />
+              <div className=" flex items-center justify-center">
+                {weatherData && (
+                  <ReactSpeedometer
+                    minValue={0}
+                    maxValue={20}
+                    width={250}
+                    height={200}
+                    needleHeightRatio={0.8}
+                    ringWidth={30}
+                    value={weatherData.wind.speed}
+                    currentValueText="#{value} m/s"
+                    currentValuePlaceholderStyle={"#{value}"}
+                    startColor={"#7900F2"}
+                    endColor={"#390768"}
+                    needleColor="#fff"
+                    textColor="#F8FAFC"
+                  />
+                )}
+              </div>
+            </div>
           </div>
           <div className="col-span-3 md:col-span-2">
             {weatherData && (
@@ -209,9 +233,6 @@ function WeatherApp() {
                       <span className="ml-2 text-base">°C</span>
                     </p>
                   </div>
-                  {/* <p className="flex text-5xl">
-                    {weatherData.weather[0].description}
-                  </p> */}
                 </div>
               </div>
             )}
