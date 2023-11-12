@@ -1,3 +1,2 @@
-import Footer from "./Footer";
-import Search from "./Search";
-export { Footer, Search };
+import Weather from "./Weather";
+export { Weather };
